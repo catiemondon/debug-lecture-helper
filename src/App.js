@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import HistoryModal from './components/HistoryModal';
-import './App.css';
-import axios from 'axios';
+import React, { Component } from "react";
+import HistoryModal from "./components/HistoryModal";
+import "./App.css";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      message: '',
+      username: "",
+      message: "",
       allMessages: [],
       messageInputDisabled: true,
       showHistory: false
@@ -17,7 +17,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/messages').then(res => {
+    debugger;
+    axios.get("/api/messages").then(res => {
       this.setState({ allMessages: res.data });
     });
   }
@@ -25,7 +26,7 @@ class App extends Component {
   createMessage() {
     let { username, message } = this.state;
     axios
-      .post('/api/messages', { username: username, message: message })
+      .post("/api/messages", { username: username, message: message })
       .then(res => {
         this.setState({ allMessages: res.data });
       });
@@ -69,8 +70,9 @@ class App extends Component {
             />
             <button
               className="button-username"
-              onClick={() => this.saveUsername()}>
-              {this.state.messageInputDisabled ? 'save' : 'update'}
+              onClick={() => this.saveUsername()}
+            >
+              {this.state.messageInputDisabled ? "save" : "update"}
             </button>
             <input
               disabled={this.state.messageInputDisabled}
@@ -80,14 +82,15 @@ class App extends Component {
               className="input-message"
               placeholder={
                 this.state.messageInputDisabled
-                  ? 'Create a username before you send a message'
-                  : 'Type in message...'
+                  ? "Create a username before you send a message"
+                  : "Type in message..."
               }
             />
             <button
               onClick={() => this.createMessage()}
               disabled={this.state.messageInputDisabled}
-              className="button-message">
+              className="button-message"
+            >
               send
             </button>
             <button onClick={() => this.showHistoryModal()}>history</button>
